@@ -215,7 +215,7 @@ def get_library_stats():
         'decades' :decades,
     }
 
-def create_visulations(stats):
+def create_visualisations(stats):
     if stats['total_books'] > 0:
         fig_read_status = go.Figure(data=[go.Pie(
             labels=['Read' , 'Unread'],
@@ -310,7 +310,7 @@ if st.session_state.current_view == "add":
                 "Fiction", "Non-Fiction", "Science", "Technology", "Fantasy","Romance", "Poetry", "Self-help", "Art", "Religion", "History", "Other"
             ])
             read_status = st.radio("Read Status", ["Read", "Unread"], horizontal=True)
-            read_Bool = read_status == "Read"
+            read_bool = read_status == "Read"
         submit_button = st.form_submit_button(label="Add Book")
 
         if submit_button and  title and author:

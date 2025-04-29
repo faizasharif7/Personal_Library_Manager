@@ -329,7 +329,7 @@ elif st.session_state.current_view == "library":
         for i , book in enumerate(st.session_state.library):
             with cols[i % 2]:
                 st.markdown(f"""<div class = 'book-card'>
-                            <h3{book['title']}</h3>
+                            <h3>{book['title']}</h3>
                             <p><strong>Author:</strong> {book['author']}</p>
                             <p><strong>Publication Year:</strong> {book['publication_year']}</p>
                             <p><span class={"read-badge" if book["read_status"] else "unread-badge"}'>{

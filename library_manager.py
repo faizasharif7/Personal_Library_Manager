@@ -328,7 +328,7 @@ elif st.session_state.current_view == "library":
         cols = st.columns(2)
         for i , book in enumerate(st.session_state.library):
             with cols[i % 2]:
-                st.markdown(f""",div class = 'book-card'>
+                st.markdown(f"""<div class = 'book-card'>
                             <h3{book['title']}</h3>
                             <p><strong>Author:</strong> {book['author']}</p>
                             <p><strong>Publication Year:</strong> {book['publication_year']}</p>
@@ -351,7 +351,7 @@ elif st.session_state.current_view == "library":
                         save_library()
                         st.rerun()
     if st.session_state.book_removed:
-        st.markdown("div class='sucess-massage'> book removed sucessfully!</div>", unsafe_allow_html=True)
+        st.markdown("<div class='sucess-massage'> book removed sucessfully!</div>", unsafe_allow_html=True)
         st.session_state.book_removed = False
 elif st.session_state.current_view =="search":
     st.markdown("<h2 class='sub-header'> search books</h2>", unsafe_allow_html=True)

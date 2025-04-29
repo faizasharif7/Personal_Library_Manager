@@ -241,12 +241,12 @@ def create_visulations(stats):
             x='Genre',
             y='Count',
             color='Count',
-            colors_continuous_scale=px.colors.sequential.Blues
+            color_continuous_scale=px.colors.sequential.Blues
         )
         fig_genres.update_layout(
             title_text='Book by publication genre',
             xaxis_title='Genres',
-            yaxis_title='Numbers of books',
+            yaxis_title='Number of books',
             heigth=400
         )
         st.plotly_chart(fig_genres, use_container_width=True)
@@ -257,7 +257,7 @@ def create_visulations(stats):
         })
         fig_decades = px.line(
             decades_df,
-            x='Decade',
+            x='Decades',
             y='Count',
             markers=True,
             line_sape="spline"
@@ -265,7 +265,7 @@ def create_visulations(stats):
         fig_decades.update_layout(
             title_text='Book by publication decade',
             xaxis_title='Decade',
-            yaxis_title='Numbers of books',
+            yaxis_title='Number of books',
             height=400
         )
         st.plotly_chart(fig_decades, use_container_width=True)
@@ -314,7 +314,7 @@ if st.session_state.current_view == "add":
         submit_button = st.form_submit_button(label="Add Book")
 
         if submit_button and  title and author:
-            add_book(title,author,publication_year,genre,read_Bool)
+            add_book(title,author,publication_year,genre,read_bool)
 
     if st.session_state.book_added:
         st.markdown("<div class='success_message'> Book added successfully!</div>", unsafe_allow_html=True)
@@ -399,7 +399,7 @@ elif st.session_state.current_view =="search":
                     st.metric("Book Read", stats['read_books'])
                 with col3:
                     st.metric("Percentage Read", f"{stats['percentage_read'] :.1f}%")
-                create_visulations()
+                create_visualisations(stats)
 
                 if stats['authors']:
                     st.markdown("<h3> Top Authors</h3>", unsafe_allow_html=True)

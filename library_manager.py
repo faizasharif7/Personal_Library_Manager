@@ -37,14 +37,14 @@ st.markdown("""
         margin-bottom: 1rem;
     }  
 
-    .sucess-message {
+    .success-message {
         padding: 1rem;
         background-color: #ECFDF5;
         border-left: 5px solid #10B981;
         border-radius: 0.375rem;    
     }
 
-    .warning-massage {
+    .warning-message {
         padding: 1rem;
         background-color: #FEF3C7;
         border-left: 5px solid #F59E0B;
@@ -55,6 +55,7 @@ st.markdown("""
         background-color: #F3F4F6;
         border-radius: 0.5rem;
         padding: 1rem;
+        marging-bottom: 1rem;
         border-left: 5px solid #3B82F6;
         transition: transform 0.3s ease;
     }
@@ -171,10 +172,10 @@ def search_books(search_term, search_by):
             results.append(book)
     st.session_state.search_results = results
 
-#calculate library status
-def get_library_status():
+#calculate library stats
+def get_library_stats():
     total_books = len(st.session_state.library)
-    read_books = sum(1 for book in st.session_state.library if book['read status'])
+    read_books = sum(1 for book in st.session_state.library if book['read_status'])
     percent_read = (read_books / total_books * 100) if total_books > 0 else 0
 
     genres = {}
@@ -194,11 +195,11 @@ def get_library_status():
             authors[book['author']] = 1
 
 #count decades
-    decades = (book['publication_year'] // 10) * 10
-    if decades in decades:
-        decades[decades] += 1
+    decade = (book['publication_year'] // 10) * 10
+    if decade in decades:
+        decades[decade] += 1
     else:
-        decades[decades] = 1
+        decades[decade] = 1
 
 #sort by count
     genres = dict(sorted(genres.items(), key=lambda x: x[1], reverse=True))
@@ -240,10 +241,10 @@ def create_visulations(stats):
             x='Genre',
             y='Count',
             color='Count',
-            colors_continous_scale = px.colors.cequential.Blues
+            colors_continuous_scale=px.colors.sequential.Blues
         )
         fig_genres.update_layout(
-            title_text='Book by publication genres',
+            title_text='Book by publication genre',
             xaxis_title='Genres',
             yaxis_title='Numbers of books',
             heigth=400
@@ -251,7 +252,7 @@ def create_visulations(stats):
         st.plotly_chart(fig_genres, use_container_width=True)
     if stats['decades']:
         decades_df = pd.DataFrame({
-            'Decade': [f"{decade}s" for decade in stats['decades'].keys()],
+            'Decades': [f"{decade}s" for decade in stats['decades'].keys()],
             'Count': list(stats['decades'].values())
         })
         fig_decades = px.line(
@@ -299,14 +300,14 @@ if st.session_state.current_view == "add":
         col1, col2 = st.columns(2)
 
         with col1:
-            title = st.text_input("book Title", max_chars=100)
+            title = st.text_input("Book Title", max_chars=100)
             author = st.text_input("Author", max_chars=100)
-            publication_year = st.number_input("publication year", min_value=1000, max_value=datetime.now().year, step=1, value=2023)
+            publication_year = st.number_input("Publication Year", min_value=1000, max_value=datetime.now().year, step=1, value=2023)
         
         with col2:
             genre = st.selectbox("Genre", [
                 ""
-                "Fiction", "Non-Fiction", "Science", "Technology", "Fanstasy","Romance", "Poetry", "Self-help", "Art", "Religious", "History", "Other"
+                "Fiction", "Non-Fiction", "Science", "Technology", "Fantasy","Romance", "Poetry", "Self-help", "Art", "Religion", "History", "Other"
             ])
             read_status = st.radio("Read Status", ["Read", "Unread"], horizontal=True)
             read_Bool = read_status == "Read"
@@ -316,7 +317,7 @@ if st.session_state.current_view == "add":
             add_book(title,author,publication_year,genre,read_Bool)
 
     if st.session_state.book_added:
-        st.markdown("<div class='sucess_message'> Book added sucessfully!</div>", unsafe_allow_html=True)
+        st.markdown("<div class='success_message'> Book added successfully!</div>", unsafe_allow_html=True)
         st.balloons()
         st.session_state.book_added = False
 elif st.session_state.current_view == "library":
@@ -332,6 +333,7 @@ elif st.session_state.current_view == "library":
                             <h3>{book['title']}</h3>
                             <p><strong>Author:</strong> {book['author']}</p>
                             <p><strong>Publication Year:</strong> {book['publication_year']}</p>
+                            <p><strong>Genre:</strong> {book['genre']}</p>
                             <p><span class={"read-badge" if book["read_status"] else "unread-badge"}'>{
                                 "Read" if book["read_status"] else "Unread"
                             }</span></p>
@@ -351,7 +353,7 @@ elif st.session_state.current_view == "library":
                         save_library()
                         st.rerun()
     if st.session_state.book_removed:
-        st.markdown("<div class='sucess-massage'> book removed sucessfully!</div>", unsafe_allow_html=True)
+        st.markdown("<div class='success-message'> book removed successfully!</div>", unsafe_allow_html=True)
         st.session_state.book_removed = False
 elif st.session_state.current_view =="search":
     st.markdown("<h2 class='sub-header'> search books</h2>", unsafe_allow_html=True)
@@ -389,7 +391,7 @@ elif st.session_state.current_view =="search":
             if not st.session_state.library:
                 st.markdown("<div class='warning-message'> Your library is empty. Add some books to see stats!</div>", unsafe_allow_html=True)
             else:
-                stats = get_library_status()
+                stats = get_library_stats()
                 col1,col2,col3 = st.columns(3)
                 with col1:
                     st.metric("Total Books", stats['total_books'])

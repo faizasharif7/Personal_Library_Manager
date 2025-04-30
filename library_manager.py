@@ -11,7 +11,7 @@ from streamlit_lottie import st_lottie
 import requests
 
 #set page configuration
-st. set_page_config(
+st.set_page_config(
     page_title="Personal Library Management System",
     page_icon="📚",
     layout="wide",

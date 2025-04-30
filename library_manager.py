@@ -36,7 +36,6 @@ st.markdown("""
         color: #3B82F6;
         font-weight: 600;
         margin-bottom: 1rem;
-        margin-bottom:1rem;
     }  
 
     .success-message {
@@ -57,7 +56,7 @@ st.markdown("""
         background-color: #F3F4F6;
         border-radius: 0.5rem;
         padding: 1rem;
-        marging-bottom: 1rem;
+        margin-bottom: 1rem;
         border-left: 5px solid #3B82F6;
         transition: transform 0.3s ease;
     }
@@ -122,7 +121,7 @@ def load_library():
                 return True
             return False
     except Exception as e:
-        st.error(f"error loading library: {e}")
+        st.error(f"Error loading library: {e}")
         return False
     
     #save library
@@ -264,7 +263,7 @@ def create_visualisations(stats):
             markers=True,
             line_shape="spline"
         )
-        fig_genres.update_layout(
+        fig_decades.update_layout(
             title_text='Book by publication decade',
             xaxis_title='Decade',
             yaxis_title='Number of books',
@@ -308,6 +307,7 @@ if st.session_state.current_view == "add":
         
         with col2:
             genre = st.selectbox("Genre", [
+                "",
                 "Fiction", "Non-Fiction", "Science", "Technology", "Fantasy","Romance", "Poetry", "Self-help", "Art", "Religion", "History", "Other"
             ])
             read_status = st.radio("Read Status", ["Read", "Unread"], horizontal=True)
@@ -318,7 +318,7 @@ if st.session_state.current_view == "add":
             add_book(title,author,publication_year,genre,read_bool)
 
     if st.session_state.book_added:
-        st.markdown("<div class='success_message'> Book added successfully!</div>", unsafe_allow_html=True)
+        st.markdown("<div class='success-message'> Book added successfully!</div>", unsafe_allow_html=True)
         st.balloons()
         st.session_state.book_added = False
 elif st.session_state.current_view == "library":
@@ -384,8 +384,8 @@ elif st.session_state.current_view == "search":
         elif search_term:
             st.markdown("<div class= 'warning-message'> No books found matching your search.</div>", unsafe_allow_html=True)
 
-        elif st.session_state.current_view == "stats":
-            st.markdown("<h2 class='sub_header'> Library statistics </h2>", unsafe_allow_html=True)
+elif st.session_state.current_view == "stats":
+            st.markdown("<h2 class='sub-header'> Library statistics </h2>", unsafe_allow_html=True)
 
             if not st.session_state.library:
                 st.markdown("<div class='warning-message'> Your library is empty. Add some books to see stats!</div>", unsafe_allow_html=True)

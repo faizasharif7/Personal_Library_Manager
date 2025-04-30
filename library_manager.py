@@ -385,7 +385,7 @@ elif st.session_state.current_view == "search":
             st.markdown("<div class= 'warning-message'> No books found matching your search.</div>", unsafe_allow_html=True)
 
         elif st.session_state.current_view == "stats":
-            st.markdown("<h2  class='sub_header'> Library statistics</h2>", unsafe_allow_html=True)
+            st.markdown("<h2 class='sub_header'> Library statistics </h2>", unsafe_allow_html=True)
 
             if not st.session_state.library:
                 st.markdown("<div class='warning-message'> Your library is empty. Add some books to see stats!</div>", unsafe_allow_html=True)
@@ -402,9 +402,9 @@ elif st.session_state.current_view == "search":
                 create_visualisations(stats)
 
                 if stats['authors']:
-                    st.markdown("<h3> Top Authors</h3>", unsafe_allow_html=True)
+                    st.markdown("<h3> Top Authors </h3>", unsafe_allow_html=True)
                     top_authors = dict(list(stats['authors'].items())[:5])
                     for author, count in top_authors.items():
                         st.markdown(f"**{author}**: {count} book{'s' if count > 1 else''}")
 st.markdown("---")
-st.markdown("Copyright ©️ 2025 Faiza Sharif Personal Library Manager", unsafe_allow_html=True)
+st.markdown("Copyright ©️ 2025 Faiza Sharif Personal Library Manager.", unsafe_allow_html=True)

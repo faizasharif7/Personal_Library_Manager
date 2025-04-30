@@ -220,7 +220,7 @@ def create_visualisations(stats):
     if stats['total_books'] > 0:
         fig_read_status = go.Figure(data=[go.Pie(
             labels=['Read' , 'Unread'],
-            values=[stats['read_books'], stats['total_books'] - stats['read_books']],
+            values=[stats['read_books'],stats['total_books'] - stats['read_books']],
             hole=.4,
             marker_colors=['#10B981', '#F87171']
         )])

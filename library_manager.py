@@ -407,4 +407,4 @@ elif st.session_state.current_view == "search":
                     for author, count in top_authors.items():
                         st.markdown(f"**{author}**: {count} book{'s' if count > 1 else''}")
 st.markdown("---")
-st.markdown("Copyright @ 2025 Faiza Sharif Personal Library Manager", unsafe_allow_html=True)
+st.markdown("Copyright © 2025 Faiza Sharif Personal Library Manager", unsafe_allow_html=True)

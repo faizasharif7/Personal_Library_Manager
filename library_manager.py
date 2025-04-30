@@ -263,7 +263,7 @@ def create_visualisations(stats):
             markers=True,
             line_sape="spline"
         )
-        fig_decades.update_layout(
+        fig_genres.update_layout(
             title_text='Book by publication decade',
             xaxis_title='Decade',
             yaxis_title='Number of books',

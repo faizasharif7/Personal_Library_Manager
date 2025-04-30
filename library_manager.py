@@ -249,7 +249,7 @@ def create_visualisations(stats):
             title_text='Book by publication genre',
             xaxis_title='Genres',
             yaxis_title='Number of books',
-            heigth=400
+            height=400
         )
         st.plotly_chart(fig_genres, use_container_width=True)
     if stats['decades']:
@@ -262,7 +262,7 @@ def create_visualisations(stats):
             x='Decades',
             y='Count',
             markers=True,
-            line_sape="spline"
+            line_shape="spline"
         )
         fig_genres.update_layout(
             title_text='Book by publication decade',
@@ -356,7 +356,7 @@ elif st.session_state.current_view == "library":
     if st.session_state.book_removed:
         st.markdown("<div class='success-message'> book removed successfully!</div>", unsafe_allow_html=True)
         st.session_state.book_removed = False
-elif st.session_state.current_view =="search":
+elif st.session_state.current_view == "search":
     st.markdown("<h2 class='sub-header'> search books</h2>", unsafe_allow_html=True)
     search_by = st.selectbox("Search by:", ["Title","Author","Genre"])
     search_term = st.text_input("Enter search term:")
@@ -384,7 +384,7 @@ elif st.session_state.current_view =="search":
         elif search_term:
             st.markdown("<div class= 'warning-message'> No books found matching your search.</div>", unsafe_allow_html=True)
 
-        elif st.session_state.current_view =="stats":
+        elif st.session_state.current_view == "stats":
             st.markdown("<h2  class='sub_header'> Library statistics</h2>", unsafe_allow_html=True)
 
             if not st.session_state.library:
